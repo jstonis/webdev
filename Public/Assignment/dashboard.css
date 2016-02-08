@@ -104,4 +104,6 @@ body {
     border-radius: 50%;
 
 }
-
+.input-group {
+    max-width: 280px;
+}
