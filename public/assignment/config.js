@@ -22,7 +22,4 @@
                     redirectTo: "/"
                 });
         })
-        .controller("MainController", function($scope, $location){
-            $scope.$location = $location;
-        });
 })();
