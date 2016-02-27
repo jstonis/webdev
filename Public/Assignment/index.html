@@ -1,20 +1,53 @@
 <!DOCTYPE html>
+<html lang="en" ng-app="FormBuilderApp">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="views/profile/profile.controller.js"></script>
+    <script src="views/admin/admin.controller.js"></script>
+
+<div ng-include src="'views/header/header.view.html'"></div>
+<div ng-include src="'views/sidebar/sidebar.view.html'"></div>
+
+</head>
+
+<body>
+
+<div class="container">
+    <nav ng-controller="MainController">
+       <!-- <a href="#/home"  class="btn" ng-class="{'btn-primary' : $location.url() == '/'}">Home</a>
+        <a href="#/profile" class="btn" ng-class="{'btn-primary' : $location.url() == '/profile'}">Profile</a>
+        <a href="#/admin"   class="btn" ng-class="{'btn-primary' : $location.url() == '/admin'}">Admin</a>
+        <br/>
+        {{$location.url()}}-->
+    </nav>
+    <div ng-view>
+    </div>
+    </div>
+</body>
+<!--
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    &lt;!&ndash; The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags &ndash;&gt;
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
     <title>Joscelyn's Assignments</title>
 
-    <!-- Bootstrap core CSS -->
+    &lt;!&ndash; Bootstrap core CSS &ndash;&gt;
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    &lt;!&ndash; Custom styles for this template &ndash;&gt;
     <link href="jumbotron.css" rel="stylesheet">
 
 </head>
@@ -35,7 +68,7 @@
     </div>
 </nav>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
+&lt;!&ndash; Main jumbotron for a primary marketing message or call to action &ndash;&gt;
 <div class="jumbotron">
     <div class="container">
         <h1>Hello! Welcome to my assignments for Web Development</h1>
@@ -43,7 +76,7 @@
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
+    &lt;!&ndash; Example row of columns &ndash;&gt;
     <div class="row">
         <div class="col-md-4">
             <h2>Assignment 1</h2>
@@ -67,7 +100,8 @@
     <footer>
         <p>&copy; 2015 Company, Inc.</p>
     </footer>
-</div> <!-- /container -->
+</div> &lt;!&ndash; /container &ndash;&gt;
+-->
 
 
 <!-- Bootstrap core JavaScript
