@@ -1,3 +1,9 @@
-/**
- * Created by Josceyn on 2/26/2016.
- */
+(function(){
+    angular
+        .controller("HeaderController", HeaderController);
+
+
+    function HeaderController($scope, $location){
+
+    }
+})();
