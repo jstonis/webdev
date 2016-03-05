@@ -9,14 +9,12 @@
 
     function FormService($rootScope) {
 
-        var forms=[];
-        forms = {
+        var allForms=[];
+        allForms = {
             forms: [
-                [
                     {"_id": "000", "title": "Contacts", "userId": 123},
                     {"_id": "010", "title": "ToDo",     "userId": 123},
                     {"_id": "020", "title": "CDs",      "userId": 234},
-                ]
 
             ],
 
@@ -25,9 +23,10 @@
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
             setCurrentForm: setCurrentForm,
-            getCurrentForm: getCurrentForm
+            getCurrentForm: getCurrentForm,
+            getFormByTitle: getFormByTitle
         };
-        return forms;
+        return allForms;
 
 
         function setCurrentForm (form) {
@@ -40,19 +39,21 @@
 
         function createFormForUser(userId, form, callback){
             var form = {
-                _id: (new Date).getTime(), userId: user.username, password: user.password
+                _id: (new Date).getTime(), userId: userId
             };
-            forms.forms.push(form);
-            callback=forms;
+            allForms.forms.push(form);
+            callback=allForms.forms;
             return callback;
 
         }
 
         function findAllFormsForUser(userId, callback){
             var formsForUser=[];
-            for (var u in forms.form) {
-                if (forms.form[u].userId==userId) {
-                    formsForUser.push(forms.form[u]);
+
+            for (var u in allForms.forms) {
+                console.log(allForms.forms[u]);
+                if (allForms.forms[u].userId==userId) {
+                    formsForUser.push(allForms.forms[u]);
                 }
             }
             callback=formsForUser;
@@ -60,10 +61,19 @@
         }
 
         function deleteFormById(formId, callback){
-            for (var u in forms.form) {
-                if (forms.form[u]._id==formId) {
-                    forms.form[u].remove();
-                    callback=forms.form;
+            for (var u in allForms.forms) {
+                if (allForms.forms[u]._id==formId) {
+                    allForms.forms[u].remove();
+                    callback=allForms.form;
+                    return callback;
+                }
+            }
+            return null;
+        }
+        function getFormByTitle(title, callback){
+            for (var u in allForms.forms){
+                if(allForms.forms[u].title=title){
+                    callback=allForms.forms;
                     return callback;
                 }
             }
@@ -71,10 +81,10 @@
         }
 
         function updateFormById(formId, newForm, callback){
-            for (var u in forms.form) {
-                if (forms.form[u]._id === formId) {
-                    forms.form[u]=newForm;
-                    callback=forms.form[u];
+            for (var u in allForms.forms) {
+                if (allForms.forms[u]._id === formId) {
+                    allForms.forms[u]=newForm;
+                    callback=allForms.form[u];
                     return callback;
                 }
             }

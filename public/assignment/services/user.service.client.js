@@ -64,7 +64,6 @@
               //  console.log(currentUsers.users[u].username);
                 if (currentUsers.users[u].username === username &&
                     currentUsers.users[u].password === password) {
-                    console.log("FOUND");
                     callback=currentUsers.users[u];
                     return callback;
                 }

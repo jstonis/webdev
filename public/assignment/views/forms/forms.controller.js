@@ -6,13 +6,14 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController)
 
-    function FormController($scope, $location, $rootScope, FormService){
+    function FormController($scope, $location, $rootScope, FormService, UserService){
         $scope.addForm=addForm;
         $scope.removeForm=removeForm;
         $scope.selectForm=selectForm;
         $scope.updateForm=updateForm;
-        $scope.forms=FormService.findAllFormsForUser($rootScope.currentUser._id,callback);
+        var callback=null;
 
+        $scope.forms=FormService.findAllFormsForUser(UserService.getCurrentUser()._id,callback);
 
         function addForm(form){
             $scope.message = null;
@@ -32,7 +33,7 @@
             }
 
             var callback=null;
-            $scope.forms=FormService.createFormForUser($rootScope.currentUser.userId,form,callback).forms;
+            $scope.forms=FormService.createFormForUser(UserService.getCurrentUser()._id,form,callback);
 
         }
         function removeForm(form){
@@ -44,7 +45,23 @@
 
         }
         function updateForm(form){
-            $scope.forms=FormService.updateForm(form);
+            /*console.log("udpate form!!!!");
+            $scope.forms=FormService.findAllFormsForUser(UserService.getCurrentUser()._id,callback);
+            console.log($scope.forms);
+
+            var callback=null;
+
+            $scope.forms=FormService.updateFormById(form._id,form,callback);*/
+
+            var callback=null;
+            $scope.form[$scope.selectedFormIndex].title = form.title;
+            var formId=FormService.forms.form[$scope.selectedFormIndex]._id;
+
+
+            FormService.updateFormById(formId,form,callback);
+
+
+
         }
     }
 })();
