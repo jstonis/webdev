@@ -38,6 +38,8 @@
         }
         function selectForm($index){
 
+        FormService.setCurrentForm($scope.forms[$index]);
+
         }
         function updateForm(form){
             $scope.forms=FormService.updateForm(form);

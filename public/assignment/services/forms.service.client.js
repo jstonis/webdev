@@ -19,12 +19,24 @@
                 ]
 
             ],
+
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
-            updateFormById: updateFormById
+            updateFormById: updateFormById,
+            setCurrentForm: setCurrentForm,
+            getCurrentForm: getCurrentForm
         };
         return forms;
+
+
+        function setCurrentForm (form) {
+            $rootScope.currentForm = form;
+        }
+
+        function getCurrentForm () {
+            return $rootScope.form;
+        }
 
         function createFormForUser(userId, form, callback){
             var form = {
@@ -37,8 +49,13 @@
         }
 
         function findAllFormsForUser(userId, callback){
-            callback=forms.forms;
-            return callback;
+            var formsForUser=[];
+            for (var u in forms.form) {
+                if (forms.form[u].userId==userId) {
+                    formsForUser.push(forms.form[u]);
+                }
+            }
+            return formsForUser;
         }
 
         function deleteFormById(formId, callback){
@@ -55,7 +72,7 @@
         function updateFormById(formId, newForm, callback){
             for (var u in forms.form) {
                 if (forms.form[u]._id === formId) {
-                    forms.form[u]=user;
+                    forms.form[u]=newForm;
                     callback=forms.form[u];
                     return callback;
                 }
