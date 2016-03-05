@@ -23,8 +23,8 @@
               //   controller: "AdminController"
                  })
                  .when("/home", {
-                 templateUrl: "views/home/home.view.html"
-                 //  controller: "HomeController"
+                 templateUrl: "views/home/home.view.html",
+                   controller: "HomeController"
                  })
                  .when("/forms", {
                  templateUrl: "views/forms/forms.view.html",

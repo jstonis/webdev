@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController)
 
-function ProfileController($scope, $location, $rootscope, UserService){
+function ProfileController($scope, $location, $rootScope, UserService){
 $scope.error=null;
     $scope.message=null;
 $scope.user=UserService.getCurrentUser();

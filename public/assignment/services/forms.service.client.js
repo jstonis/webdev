@@ -55,7 +55,8 @@
                     formsForUser.push(forms.form[u]);
                 }
             }
-            return formsForUser;
+            callback=formsForUser;
+            return callback;
         }
 
         function deleteFormById(formId, callback){

@@ -16,6 +16,7 @@
 
         function addForm(form){
             $scope.message = null;
+
             if (form == null) {
                 $scope.message = "Please fill in the required fields";
                 return;
@@ -30,6 +31,7 @@
                 return;
             }
 
+            var callback=null;
             $scope.forms=FormService.createFormForUser($rootScope.currentUser.userId,form,callback).forms;
 
         }

@@ -61,8 +61,10 @@
 
         function findUserByCredentials(username, password, callback) {
             for (var u in currentUsers.users) {
+              //  console.log(currentUsers.users[u].username);
                 if (currentUsers.users[u].username === username &&
-                   currentUsers.users[u].password === password) {
+                    currentUsers.users[u].password === password) {
+                    console.log("FOUND");
                     callback=currentUsers.users[u];
                     return callback;
                 }

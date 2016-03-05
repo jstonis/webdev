@@ -13,9 +13,10 @@
             $scope.message=null;
 
         function login(user){
-            var user=UserService.findUserByCredentials({username: user.username,password: user.password});
 
-            console.log(user);
+            var callback=null;
+            var user=UserService.findUserByCredentials(user.username,user.password,callback);
+
             if(user){
                 $rootScope.currentUser=user;
                 UserService.setCurrentUser(user);

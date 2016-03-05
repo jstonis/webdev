@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<html lang="en">
+
+
 <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -12,11 +15,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="!isLoggedIn()"><a href="#/register">Register</a></li>
-                <li ng-show="!isLoggedIn()"><a href="#/login">Login</a></li>
-                <li ng-show="isLoggedIn()"><a href="#/home">Logout</a></li>
+                <li ng-show="isLoggedOut()"><a href="#/register">Register</a></li>
+                <li ng-click="logout()" ng-show="isLoggedOut()"><a href="#/login">Login</a></li>
+                <li ng-show="isLoggedIn()"><a ng-click="logout()">Logout</a></li>
                 <li ng-show="isLoggedIn()"><a href="#/profile">Username</a></li>
-                <li ng-show="isLoggedIn()"><a href="#/admin">Admin</a></li>
+                <li ng-show="isLoggedIn() && isAdmin()"><a href="#/admin">Admin</a></li>
             </ul>
 
         </div>
