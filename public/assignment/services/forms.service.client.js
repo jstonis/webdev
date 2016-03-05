@@ -62,8 +62,9 @@
         function deleteFormById(formId, callback){
             for (var u in allForms.forms) {
                 if (allForms.forms[u]._id==formId) {
-                    allForms.forms[u].remove();
-                    callback=allForms.form;
+                    allForms.forms.splice(u,1);
+                    callback=allForms.forms;
+                    console.log(allForms.forms);
                     return callback;
                 }
             }
@@ -72,7 +73,7 @@
         function getFormByTitle(title, callback){
             for (var u in allForms.forms){
                 if(allForms.forms[u].title=title){
-                    callback=allForms.forms;
+                    callback=allForms.forms[u];
                     return callback;
                 }
             }
@@ -80,10 +81,14 @@
         }
 
         function updateFormById(formId, newForm, callback){
+            console.log("update form: ");
             for (var u in allForms.forms) {
+                console.log("going through forms:"+ allForms.forms[u]._id);
+                console.log("selected form id: " + formId);
                 if (allForms.forms[u]._id === formId) {
+                    console.log("update form found!");
                     allForms.forms[u]=newForm;
-                    callback=allForms.form[u];
+                    callback=allForms.forms[u];
                     return callback;
                 }
             }

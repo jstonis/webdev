@@ -39,30 +39,30 @@
 
         }
         function removeForm(form){
-            $scope.forms=FormService.removeForm(form);
+            var callback=null;
+            FormService.deleteFormById(form._id,callback);
+            console.log(form._id);
+            var user_id=form.userId;
+            console.log("new forms: "+ FormService.findAllFormsForUser(user_id,callback));
+            $scope.forms=FormService.findAllFormsForUser(user_id,callback);
         }
-        function selectForm($index){
+        function selectForm(index){
+            var callback=null;
+            $scope.selectedFormIndex = index;
+            FormService.setCurrentForm($scope.forms[index]);
 
-        FormService.setCurrentForm($scope.forms[$index]);
+
+            $scope.newForm = {
+                title: $scope.forms[index].title
+            };
 
         }
         function updateForm(form){
-            /*console.log("udpate form!!!!");
-            $scope.forms=FormService.findAllFormsForUser(UserService.getCurrentUser()._id,callback);
-            console.log($scope.forms);
-
             var callback=null;
-
-            $scope.forms=FormService.updateFormById(form._id,form,callback);*/
-
-            var callback=null;
-            $scope.form[$scope.selectedFormIndex].title = form.title;
-            var formId=FormService.forms.form[$scope.selectedFormIndex]._id;
-
-
-            FormService.updateFormById(formId,form,callback);
-
-
+            console.log($scope.selectedFormIndex);
+            console.log($scope.forms[$scope.selectedFormIndex].title);
+            form._id=$scope.forms[$scope.selectedFormIndex]._id;
+            $scope.forms[$scope.selectedFormIndex].title=FormService.updateFormById($scope.forms[$scope.selectedFormIndex]._id,form,callback).title;
 
         }
     }

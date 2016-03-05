@@ -7,9 +7,9 @@
         .controller("ProfileController", ProfileController)
 
 function ProfileController($scope, $location, $rootScope, UserService){
-$scope.error=null;
+    $scope.error=null;
     $scope.message=null;
-$scope.user=UserService.getCurrentUser();
+    $scope.user=UserService.getCurrentUser();
 
 
     if (!$scope.currentUser) {
