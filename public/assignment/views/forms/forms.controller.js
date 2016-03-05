@@ -27,13 +27,15 @@
                 $scope.message = "Please fill in the required fields";
                 return;
             }
-            if (!form.name) {
+            if (!form.title) {
                 $scope.message = "Please provide a name";
                 return;
             }
 
             var callback=null;
-            $scope.forms=FormService.createFormForUser(UserService.getCurrentUser()._id,form,callback);
+            FormService.createFormForUser(UserService.getCurrentUser()._id,form,callback);
+            callback=null;
+            $scope.forms=FormService.findAllFormsForUser(UserService.getCurrentUser()._id,callback);
 
         }
         function removeForm(form){

@@ -39,7 +39,7 @@
 
         function createFormForUser(userId, form, callback){
             var form = {
-                _id: (new Date).getTime(), userId: userId
+                _id: (new Date).getTime(), userId: userId, title: form.title
             };
             allForms.forms.push(form);
             callback=allForms.forms;
@@ -51,7 +51,6 @@
             var formsForUser=[];
 
             for (var u in allForms.forms) {
-                console.log(allForms.forms[u]);
                 if (allForms.forms[u].userId==userId) {
                     formsForUser.push(allForms.forms[u]);
                 }

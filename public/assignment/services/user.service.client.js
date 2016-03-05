@@ -74,6 +74,7 @@
         function updateUser (userId, user, callback) {
             for (var u in currentUsers.users) {
                 if (currentUsers.users[u]._id === userId) {
+                    console.log("on the right track");
                     currentUsers.users[u]=user;
                     callback=currentUsers.users[u];
                     return callback;
