@@ -59,11 +59,11 @@
         }
         function updateForm(form){
             var callback=null;
-            console.log($scope.selectedFormIndex);
-            console.log($scope.forms[$scope.selectedFormIndex].title);
-            form._id=$scope.forms[$scope.selectedFormIndex]._id;
-            $scope.forms[$scope.selectedFormIndex].title=FormService.updateFormById($scope.forms[$scope.selectedFormIndex]._id,form,callback).title;
 
+            if($scope.forms.length>0) {
+                form._id = $scope.forms[$scope.selectedFormIndex]._id;
+                $scope.forms[$scope.selectedFormIndex].title = FormService.updateFormById($scope.forms[$scope.selectedFormIndex]._id, form, callback).title;
+            }
         }
     }
 })();
