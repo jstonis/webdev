@@ -12,7 +12,7 @@
         currentUsers = {
             users: [
                 {        "_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                    "username":"alice",  "password":"alice",   "roles": ["student"], "cartItems": []                  },
+                    "username":"alice",  "password":"alice",   "roles": ["student"], "cartItems": []  , "likedProducts":[], "following": [234, 345]                },
                 {        "_id":234, "firstName":"Bob",              "lastName":"Hope",
                     "username":"bob",    "password":"bob",     "roles": ["admin"], "cartItems": []             },
                 {        "_id":345, "firstName":"Charlie",          "lastName":"Brown",
@@ -20,7 +20,7 @@
                 {        "_id":456, "firstName":"Dan",              "lastName":"Craig",
                     "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "cartItems": []  },
                 {        "_id":567, "firstName":"Edward",           "lastName":"Norton",
-                    "username":"ed",     "password":"ed",      "roles": ["student"], "cartItems": []              }
+                    "username":"ed",     "password":"ed",      "roles": ["student"], "cartItems": [], "likedProducts":[], "following": []}
             ],
             createUser: createUser,
             findUserByUsername: findUserByUsername,
@@ -29,7 +29,9 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            getFollowersByUserId: getFollowersByUserId,
+            getUsersNameById: getUsersNameById
         };
         return currentUsers;
 
@@ -95,6 +97,23 @@
                     currentUsers.users[u].remove();
                     callback=currentUsers.users;
                     return callback;
+                }
+            }
+            return null;
+        }
+        function getFollowersByUserId(userId){
+            for (var u in currentUsers.users) {
+                if (currentUsers.users[u]._id === userId) {
+                    return currentUsers.users[u].following;
+                }
+            }
+            return null;
+
+        }
+        function getUsersNameById(userId){
+            for (var u in currentUsers.users) {
+                if (currentUsers.users[u]._id === userId) {
+                    return currentUsers.users[u].firstName + " "+ currentUsers.users[u].lastName;
                 }
             }
             return null;

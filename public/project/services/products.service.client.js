@@ -13,7 +13,7 @@
                 {        "_id":123, "image":"images/bmw wax.jpg",            "productName":"BMW Express Wax", "carMakes":["BMW"],
                         "description": "exterior", "accessory":false, "kit": false, "numOfLikes": 0, "reviews": []
                 },
-                {        "_id":123, "image":"images/toyota washer fluid.jpg", "productName":"Toyota Windshield Washer Fluid",
+                {        "_id":124, "image":"images/toyota washer fluid.jpg", "productName":"Toyota Windshield Washer Fluid",
                         "carMakes": ["Toyota"], "description": "exterior", "accessory": false, "kit": false, "numOfLikes": 0, "reviews": [[]]
                 }
             ],
@@ -95,7 +95,7 @@
             for (var u in currentProducts.products) {
                 for (var j in currentProducts.products.carMakes[j]) {
                     if (!carMakes.contains(currentProducts.products[u].carMakes[j])) {
-                        carMakes.add(currentProducts.products[u].carMakes[j])
+                        carMakes.push(currentProducts.products[u].carMakes[j])
                     }
                 }
             }
@@ -109,7 +109,7 @@
 
             for (var u in currentProducts.products) {
                 if(currentProducts.products[u].description="exterior"){
-                    exteriorProducts.add(currentProducts.products[u]);
+                    exteriorProducts.push(currentProducts.products[u]);
                 }
             }
             return exteriorProducts;
@@ -122,7 +122,7 @@
 
             for (var u in currentProducts.products) {
                 if(currentProducts.products[u].description="interior"){
-                    interiorProducts.add(currentProducts.products[u]);
+                    interiorProducts.push(currentProducts.products[u]);
                 }
             }
             return interiorProducts;
@@ -133,7 +133,7 @@
 
             for (var u in currentProducts.products) {
                 if(currentProducts.products[u].accessory){
-                    accessories.add(currentProducts.products[u]);
+                    accessories.push(currentProducts.products[u]);
                 }
             }
             return accessories;
@@ -143,7 +143,7 @@
 
             for (var u in currentProducts.products) {
                 if(currentProducts.products[u].kit){
-                    carKits.add(currentProducts.products[u]);
+                    carKits.push(currentProducts.products[u]);
                 }
             }
             return carKits;
@@ -163,7 +163,7 @@
 
             for (var u in currentProducts.reviews) {
                 if(currentProducts.reviews[u].productId=product._id){
-                     productReviews.add(currentProducts.reviews[u]);
+                     productReviews.push(currentProducts.reviews[u]);
                 }
             }
             return productReviews;
@@ -175,7 +175,7 @@
 
             for (var u in currentProducts.reviews) {
                 if(currentProducts.reviews[u].userId=user._id){
-                    productReviews.add(currentProducts.reviews[u]);
+                    productReviews.push(currentProducts.reviews[u]);
                 }
             }
             return productReviews;

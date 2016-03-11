@@ -6,10 +6,16 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController)
 
-function ProfileController($scope, $location, $rootScope, UserService){
+function ProfileController($scope, $location, $rootScope, UserService, ProductsService){
     $scope.error=null;
     $scope.message=null;
     $scope.user=UserService.getCurrentUser();
+    $scope.userReviews=ProductsService.getReviewsByUser($scope.user);
+    var followers=UserService.getFollowersByUserId($scope.user._id);
+    $scope.userFollowings=getUsersByIds(followers);
+
+    console.log($scope.userReviews);
+    console.log($scope.userFollowings);
 
 
     if (!$scope.currentUser) {
@@ -51,6 +57,16 @@ function ProfileController($scope, $location, $rootScope, UserService){
         else{
             $scope.message="Unable to update the user";
         }
+    }
+    function getUsersByIds(userIds){
+        var usersNames=[];
+
+        for (var u in userIds) {
+                usersNames.push(UserService.getUsersNameById(userIds[u]));
+        }
+        return usersNames;
+
+
     }
 
 }
