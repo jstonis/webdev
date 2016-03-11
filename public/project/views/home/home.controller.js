@@ -7,8 +7,9 @@
         .controller("HomeController", HomeController)
 
 
-    function HomeController($scope, UserService, $location, $rootScope){
-
+    function HomeController($scope, ProductsService, $location, $rootScope, UserService){
+        $scope.products=ProductsService.findAllProducts();
+        console.log($scope.products);
 
     }
 

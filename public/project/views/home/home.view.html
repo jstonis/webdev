@@ -30,8 +30,30 @@
 
             <p>Auto Detailing Zone has a lot to offer to all you detailers out there, whether it's for your personal car, or you're a company looking for quality products.</p>
 
+            <br>
+            <br>
+            <br>
+
+    <table class="table table-striped">
+        <thead>Products</thead>
+        <tbody>
+        <tr ng-repeat="product in products"
+            ng-class="{'success' : $index==selectedFormIndex}">
+            <td>
+                <img height="100px" ng-src="{{product.image}}"/>
+            </td>
+            <td>
+                <a href="#/productdisplay">{{product.productName}}</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
         </div>
+
     </div>
+
+
+
 </div>
 
 <!-- Bootstrap core JavaScript

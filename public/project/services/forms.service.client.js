@@ -64,7 +64,6 @@
                 if (allForms.forms[u]._id==formId) {
                     allForms.forms.splice(u,1);
                     callback=allForms.forms;
-                    console.log(allForms.forms);
                     return callback;
                 }
             }
