@@ -7,8 +7,10 @@
         .controller("CarKitsController", CarKitsController)
 
 
-    function CarKitsController($scope, UserService, $location, $rootScope){
+    function CarKitsController($scope, UserService, $location, $rootScope, ProductsService){
 
+
+        $scope.carKits=ProductsService.getCarKits();
 
 
     }

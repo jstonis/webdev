@@ -7,7 +7,14 @@
         .controller("AccessoriesController", AccessoriesController)
 
 
-    function AccessoriesController($scope, UserService, $location, $rootScope){
+    function AccessoriesController($scope, UserService, $location, $rootScope,ProductsService, UserService){
+        $scope.accessories=ProductsService.getAccessories();
+        $scope.addItem=addCart;
+
+        function addCart(accessory){
+            console.log(accessory._id);
+            UserService.addToCart(accessory);
+        }
 
 
 

@@ -11,10 +11,10 @@
         currentProducts = {
             products: [
                 {        "_id":123, "image":"images/bmw wax.jpg",            "productName":"BMW Express Wax", "carMakes":["BMW"],
-                        "description": "exterior", "accessory":false, "kit": false, "numOfLikes": 0, "reviews": []
+                        "description": "exterior", "accessory":true, "kit": false, "numOfLikes": 0, "reviews": [], "price":40
                 },
                 {        "_id":124, "image":"images/toyota washer fluid.jpg", "productName":"Toyota Windshield Washer Fluid",
-                        "carMakes": ["Toyota"], "description": "exterior", "accessory": false, "kit": false, "numOfLikes": 0, "reviews": [[]]
+                        "carMakes": ["Toyota"], "description": "exterior", "accessory": true, "kit": true, "numOfLikes": 0, "reviews": [], "price": 20
                 }
             ],
             reviews: [{"productId": 123, "userId": 123, "review": "Good Product"}]
@@ -95,12 +95,15 @@
             var carMakes = [];
 
             for (var u in currentProducts.products) {
-                for (var j in currentProducts.products.carMakes[j]) {
-                    if (!carMakes.contains(currentProducts.products[u].carMakes[j])) {
+                for (var j in currentProducts.products[u].carMakes) {
+                    console.log(currentProducts.products[u].carMakes[j]);
+                    if (carMakes.indexOf(currentProducts.products[u].carMakes[j])==-1) {
+                        console.log("here!");
                         carMakes.push(currentProducts.products[u].carMakes[j])
                     }
                 }
             }
+
             return carMakes;
 
         }

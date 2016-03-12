@@ -31,7 +31,8 @@
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             getFollowersByUserId: getFollowersByUserId,
-            getUsersNameById: getUsersNameById
+            getUsersNameById: getUsersNameById,
+            addToCart: addToCart
         };
         return currentUsers;
 
@@ -117,6 +118,12 @@
                 }
             }
             return null;
+        }
+        function addToCart(accessory){
+            if($rootScope.currentUser!=null){
+                $rootScope.currentUser.cartItems.push(accessory);
+                       }
+
         }
     }
 })();
