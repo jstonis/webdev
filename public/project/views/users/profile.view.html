@@ -81,8 +81,11 @@
             <br>
             <br>
             <br>
-            <button class="btn btn-default" style="width:70px;height:35px" ng-click="updatePhoto()" role="button">Browse</button>
-            <br>
+           <span class="file-input btn btn-primary btn-file">
+                Browse<input type="file" multiple>
+            </span>
+
+                <br>
             <br>
             <button class="btn btn-default" style="width:70px;height:35px" ng-click="follow()" role="button">Follow</button>
 
@@ -95,7 +98,7 @@
         <table class="table table-striped">
             <thead>Following</thead>
             <tbody>
-            <tr ng-repeat="userFollowing in userFollowings"
+            <tr ng-repeat="userFollowing in userFollowings  "
                 ng-class="{'success' : $index==selectedFormIndex}">
                 <td>
                     <a href="#/productdisplay">{{userFollowing}}</a>
@@ -110,10 +113,13 @@
             <table class="table table-striped">
                 <thead>Reviews</thead>
                 <tbody>
-                <tr ng-repeat="userReviews in userReviews"
+                <tr ng-repeat="viewReviews in profileViewReviews"
                     ng-class="{'success' : $index==selectedFormIndex}">
                     <td>
-                        <a href="#/productdisplay">{{userReviews}}</a>
+                        <img height="60px" ng-src="{{viewReviews.image}}"/>
+                    </td>
+                    <td>
+                       {{viewReviews.review}}
                     </td>
                 </tr>
                 </tbody>

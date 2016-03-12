@@ -10,12 +10,15 @@ function ProfileController($scope, $location, $rootScope, UserService, ProductsS
     $scope.error=null;
     $scope.message=null;
     $scope.user=UserService.getCurrentUser();
-    $scope.userReviews=ProductsService.getReviewsByUser($scope.user);
+    var userReviews=ProductsService.getReviewsByUser($scope.user);
     var followers=UserService.getFollowersByUserId($scope.user._id);
     $scope.userFollowings=getUsersByIds(followers);
+    $scope.follow=follow;
+    var reviewsWithImage=profileViewReviews();
+    $scope.profileViewReviews=profileViewReviews();
 
-    console.log($scope.userReviews);
-    console.log($scope.userFollowings);
+
+
 
 
     if (!$scope.currentUser) {
@@ -68,6 +71,21 @@ function ProfileController($scope, $location, $rootScope, UserService, ProductsS
 
 
     }
+
+    function follow(){
+
+    }
+    function profileViewReviews(){
+        var userReviewsWithImage=[];
+
+        for(var u in userReviews){
+            var reviews={image:ProductsService.getImageByProductId(userReviews[u].productId), review:userReviews[u].review};
+            userReviewsWithImage.push(reviews);
+        }
+        return userReviewsWithImage;
+
+    }
+
 
 }
 

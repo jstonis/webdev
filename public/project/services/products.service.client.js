@@ -33,7 +33,9 @@
             getCarKits: getCarKits,
             getNumberOfLikes: getNumberOfLikes,
             getReviewsByProduct: getReviewsByProduct,
-            getReviewsByUser: getReviewsByUser
+            getReviewsByUser: getReviewsByUser,
+            getReviews: getReviews,
+            getImageByProductId: getImageByProductId
         };
         return currentProducts;
 
@@ -181,5 +183,17 @@
             return productReviews;
 
         }
+        function getReviews() {
+            return currentProducts.reviews;
+        }
+
+    function getImageByProductId(productId){
+        for (var u in currentProducts.products) {
+            if(currentProducts.products[u]._id=productId){
+               return currentProducts.products[u].image;
+            }
+        }
+
+    }
     }
 })();
