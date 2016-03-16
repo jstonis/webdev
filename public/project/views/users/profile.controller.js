@@ -6,21 +6,29 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController)
 
-function ProfileController($scope, $location, $rootScope, UserService, ProductsService){
+function ProfileController($scope, $location, $routeParams, UserService, ProductsService, $rootScope){
     $scope.error=null;
     $scope.message=null;
-    $scope.user=UserService.getCurrentUser();
+   // $scope.user=UserService.getCurrentUser();
+
+   // var followers=UserService.getFollowersByUserId($scope.user._id);
+
+    //console.log($scope.userFollowings);
+
+    $scope.id=$routeParams.id;
+    $scope.user=UserService.findUserById($routeParams.id);
+    var followings=UserService.getFollowersByUserId($scope.user._id);
+    $scope.userFollowings=UserService.getArrayOfUsersByIds(followings);
+    console.log($scope.userFollowings);
     var userReviews=ProductsService.getReviewsByUser($scope.user);
-    var followers=UserService.getFollowersByUserId($scope.user._id);
-    $scope.userFollowings=getUsersByIds(followers);
+
+    //$scope.userFollowings=getUsersByIds(followers);
     $scope.follow=follow;
     var reviewsWithImage=profileViewReviews();
     $scope.profileViewReviews=profileViewReviews();
+    $scope.userIsCurrentUser=userIsCurrentUser;
 
-
-
-
-
+    //var username=$routeParams.username;
     if (!$scope.currentUser) {
         $location.url("/home");
     }
@@ -73,17 +81,26 @@ function ProfileController($scope, $location, $rootScope, UserService, ProductsS
     }
 
     function follow(){
+        $rootScope.currentUser.following.push($scope.user._id);
 
     }
     function profileViewReviews(){
         var userReviewsWithImage=[];
 
         for(var u in userReviews){
-            var reviews={image:ProductsService.getImageByProductId(userReviews[u].productId), review:userReviews[u].review};
+            var reviews={image:ProductsService.getImageByProductId(userReviews[u].productId), review:userReviews[u].review, productId:userReviews[u].productId};
             userReviewsWithImage.push(reviews);
         }
         return userReviewsWithImage;
 
+    }
+    function userIsCurrentUser(){
+        if($scope.user._id==$rootScope.currentUser._id){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

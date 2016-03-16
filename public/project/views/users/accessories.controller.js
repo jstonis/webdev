@@ -12,8 +12,8 @@
         $scope.addItem=addCart;
 
         function addCart(accessory){
-            console.log(accessory._id);
             UserService.addToCart(accessory);
+            $location.url("/cart");
         }
 
 

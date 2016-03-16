@@ -7,8 +7,13 @@
         .controller("InteriorCleaningController", InteriorCleaningController)
 
 
-    function InteriorCleaningController($scope, UserService, $location, $rootScope){
+    function InteriorCleaningController($scope, UserService, $location, $rootScope, ProductsService){
+        $scope.interiorProducts=ProductsService.getInteriorProducts();
+        $scope.addItem=addCart;
 
+        function addCart(accessory){
+            UserService.addToCart(accessory);
+        }
 
 
     }

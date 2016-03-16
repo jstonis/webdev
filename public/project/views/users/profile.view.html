@@ -21,7 +21,6 @@
 
 <body>
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 col-sm-offset-2 col-md-7 col-md-offset-1 main">
@@ -57,7 +56,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button class="btn btn-default" ng-click="update(user)" role="button">Update</button>
+                        <button class="btn btn-default" ng-show="userIsCurrentUser()" ng-click="update(user)" role="button">Update</button>
                     </div>
                 </div>
 
@@ -81,13 +80,13 @@
             <br>
             <br>
             <br>
-           <span class="file-input btn btn-primary btn-file">
+           <span class="file-input btn btn-primary btn-file" ng-show="userIsCurrentUser()">
                 Browse<input type="file" multiple>
             </span>
 
                 <br>
             <br>
-            <button class="btn btn-default" style="width:70px;height:35px" ng-click="follow()" role="button">Follow</button>
+            <button class="btn btn-default" style="width:70px;height:35px" ng-hide="userIsCurrentUser()" ng-click="follow()" role="button">Follow</button>
 
 
         </div>
@@ -98,10 +97,9 @@
         <table class="table table-striped">
             <thead>Following</thead>
             <tbody>
-            <tr ng-repeat="userFollowing in userFollowings  "
-                ng-class="{'success' : $index==selectedFormIndex}">
+            <tr ng-repeat="userFollowing in userFollowings">
                 <td>
-                    <a href="#/productdisplay">{{userFollowing}}</a>
+                    <a href="#/profile/{{userFollowing._id}}">{{userFollowing.username}}</a>
                 </td>
             </tr>
             </tbody>
@@ -113,10 +111,9 @@
             <table class="table table-striped">
                 <thead>Reviews</thead>
                 <tbody>
-                <tr ng-repeat="viewReviews in profileViewReviews"
-                    ng-class="{'success' : $index==selectedFormIndex}">
+                <tr ng-repeat="viewReviews in profileViewReviews">
                     <td>
-                        <img height="60px" ng-src="{{viewReviews.image}}"/>
+                        <a href="#/productdisplay/{{viewReviews.productId}}"><img height="100px" ng-src="{{viewReviews.image}}"/></a>
                     </td>
                     <td>
                        {{viewReviews.review}}

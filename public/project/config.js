@@ -14,17 +14,18 @@
                     templateUrl: "views/users/login.view.html",
                     controller: "LoginController"
                 })
-                .when("/profile", {
+                .when("/profile/:id", {
                     templateUrl: "views/users/profile.view.html",
                     controller: "ProfileController"
                 })
                 .when("/admin", {
-                 templateUrl: "views/admin/admin.view.html"
-              //   controller: "AdminController"
+                 templateUrl: "views/admin/admin.view.html",
+                 controller: "AdminController"
                  })
                  .when("/home", {
                  templateUrl: "views/home/home.view.html",
                    controller: "HomeController"
+
                  })
                  .when("/forms", {
                  templateUrl: "views/forms/forms.view.html",
@@ -62,12 +63,72 @@
                     templateUrl: "views/users/orderconfirmation.html",
                     controller: "OrderConfirmationController"
                 })
-                .when("/productdisplay", {
+                .when("/productdisplay/:id", {
                     templateUrl: "views/users/productdisplay.html",
                     controller: "ProductDisplayController"
                 })
                 .otherwise({
-                    redirectTo: "/home"
+                    redirectTo: "home"
+
+
                 });
         })
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/portal/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('admin') != -1)
+            {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            }
+            // User is Not Authenticated
+            else
+            {
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+
+        return deferred.promise;
+    };
+
+    function getLoggedIn(UserService, $q) {
+        var deferred = $q.defer();
+
+        UserService
+            .getCurrentUser()
+            .then(function(response){
+                var currentUser = response.data;
+                UserService.setCurrentUser(currentUser);
+                deferred.resolve();
+            });
+
+        return deferred.promise;
+    }
+
+    function checkLoggedIn(UserService, $q, $location) {
+
+        var deferred = $q.defer();
+
+        UserService
+            .getCurrentUser()
+            .then(function(response) {
+                var currentUser = response.data;
+                if(currentUser) {
+                    UserService.setCurrentUser(currentUser);
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url("/home");
+                }
+            });
+
+        return deferred.promise;
+    }
+
 })();

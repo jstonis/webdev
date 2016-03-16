@@ -7,8 +7,14 @@
         .controller("ExteriorCleaningController", ExteriorCleaningController)
 
 
-    function ExteriorCleaningController($scope, UserService, $location, $rootScope){
+    function ExteriorCleaningController($scope, UserService, $location, $rootScope, ProductsService){
+        $scope.exteriorProducts=ProductsService.getExteriorProducts();
+        $scope.addItem=addCart;
 
+        function addCart(accessory){
+            UserService.addToCart(accessory);
+            $location.url("/cart");
+        }
 
 
     }

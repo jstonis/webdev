@@ -15,6 +15,7 @@
 
         function isAdmin(){
             for (var u in $rootScope.currentUser.roles) {
+                console.log($rootScope.currentUser.roles[u]);
                 if ($rootScope.currentUser.roles[u] === "admin") {
                     return true;
                 }

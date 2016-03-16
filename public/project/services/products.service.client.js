@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("ProductsService", ProductsService);
 
-    function ProductsService($rootScope) {
+    function ProductsService($rootScope,$http) {
         var currentProducts=[];
         currentProducts = {
             products: [
@@ -35,7 +35,8 @@
             getReviewsByProduct: getReviewsByProduct,
             getReviewsByUser: getReviewsByUser,
             getReviews: getReviews,
-            getImageByProductId: getImageByProductId
+            getImageByProductId: getImageByProductId,
+            getProductById: getProductById
         };
         return currentProducts;
 
@@ -52,7 +53,8 @@
 
         function createProduct (product, callback) {
             var product = {
-                _id: (new Date).getTime(), image: product.image, productName: product.productName
+                _id: (new Date).getTime(), image: product.image, productName: product.productName, description:product.description,
+                accessory: product.accessory, price: product.kit, kit: product.kit, carMakes: product.carMakes
             };
             currentProducts.products.push(product);
             callback=product;
@@ -198,5 +200,13 @@
         }
 
     }
+        function getProductById(productId){
+            for (var u in currentProducts.products) {
+                if(currentProducts.products[u]._id=productId){
+                    return currentProducts.products[u];
+                }
+            }
+        }
+
     }
 })();

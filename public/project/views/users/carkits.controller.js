@@ -8,9 +8,14 @@
 
 
     function CarKitsController($scope, UserService, $location, $rootScope, ProductsService){
-
-
         $scope.carKits=ProductsService.getCarKits();
+        $scope.addItem=addCart;
+
+        function addCart(accessory){
+            UserService.addToCart(accessory);
+            $location.url("/cart")
+        }
+
 
 
     }

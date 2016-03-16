@@ -29,6 +29,7 @@
         }
         function isLoggedIn(){
             if($rootScope.currentUser){
+                $scope.user=$rootScope.currentUser;
                 return true;
             }
             else{

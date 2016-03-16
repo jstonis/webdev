@@ -80,7 +80,6 @@
         }
 
         function updateFormById(formId, newForm, callback){
-            console.log("update form: ");
             for (var u in allForms.forms) {
                 console.log("going through forms:"+ allForms.forms[u]._id);
                 console.log("selected form id: " + formId);

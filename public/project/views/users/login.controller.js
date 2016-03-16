@@ -20,7 +20,7 @@
             if(user){
                 $rootScope.currentUser=user;
                 UserService.setCurrentUser(user);
-                $location.url("/profile");
+                $location.url("/profile/"+UserService.getCurrentUser()._id);
             }
             else{
                 $scope.message = "Incorrect user details. Try again!";
