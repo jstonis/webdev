@@ -22,11 +22,11 @@ function ProfileController($scope, $location, $rootScope, UserService){
         UserService
             .getProfile()
             .then(function(response){
-                vm.profile=response.data;
+                $scope.profile=response.data;
                 console.log(vm.profile);
-            })
-        return init();
+            });
     }
+    return init();
 
 
     function update(user){

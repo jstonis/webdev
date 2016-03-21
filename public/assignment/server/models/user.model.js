@@ -13,14 +13,13 @@ module.exports = function() {
     return api;
 
 
-    function createUser (user, callback) {
+    function createUser (user) {
         var user = {
             _id: (new Date).getTime(), username: user.username, password: user.password
         };
         mock.push(user);
         //currentUsers.users.push(user);
-        callback=user;
-        return callback;
+        return user;
     }
 
     function findUserByUsername (username) {
@@ -37,34 +36,31 @@ module.exports = function() {
         return null;
     }
 
-    function findUserByCredentials(username, password, callback) {
-       /* for (var u in currentUsers.users) {
-            //  console.log(currentUsers.users[u].username);
-            if (currentUsers.users[u].username === username &&
-                currentUsers.users[u].password === password) {
-                callback=currentUsers.users[u];
-                return callback;
-            }
-        }*/
-
+    function findUserByCredentials(credentials, callback) {
+        /* for (var u in currentUsers.users) {
+         //  console.log(currentUsers.users[u].username);
+         if (currentUsers.users[u].username === username &&
+         currentUsers.users[u].password === password) {
+         callback=currentUsers.users[u];
+         return callback;
+         }
+         }*/
 
         for (var u in mock) {
             //  console.log(currentUsers.users[u].username);
-            if (mock[u].username === username &&
-                mock[u].password === password) {
+            if (mock[u].username === credentials.username &&
+                mock[u].password === credentials.password) {
                 callback=mock[u];
                 return callback;
             }
         }
         return null;
     }
-
-    function updateUser (userId, user, callback) {
+    function updateUser (userId, user) {
         for (var u in mock) {
             if (mock[u]._id === userId) {
                 mock[u]=user;
-                callback=mock[u];
-                return callback;
+               return mock[u]
             }
         }
         return null;
@@ -72,24 +68,24 @@ module.exports = function() {
     }
 
     function findAllUsers(callback){
-        callback=mock;
-        return callback;
+        return mock;
 
     }
-    function deleteUserById(userId, callback){
+    function deleteUserById(userId){
         for (var u in mock) {
             if (mock._id === userId) {
                 mock[u].remove();
-                callback=mock;
-                return callback;
+                return mock;
             }
         }
         return null;
     }
     function findUserById(id){
         for(var u in mock){
-            if(mock[u]._id==id){}
-            return mock[u];
+            if(mock[u]._id==id){
+                return mock[u];
+            }
+
         }
         return null;
 

@@ -2,7 +2,7 @@
  * Created by Josceyn on 3/18/2016.
  */
 module.exports = function(app, formsModel, userModel) {
-console.log("test");
+
     app.post("/api/assignment/user", createNewUser);
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
@@ -84,6 +84,7 @@ console.log("test");
 
     function login(req, res) {
         var credentials = req.body;
+
         var user = userModel.findUserByCredentials(credentials);
         req.session.currentUser = user;
         res.json(user);
@@ -92,12 +93,17 @@ console.log("test");
     function profile(req, res) {
         var userId = req.params.userId;
         var user = userModel.findUserById(userId);
-        var form = formModel.findAllFormsForUser(userId);
+        var form = formsModel.findAllFormsForUser(userId);
         res.json(user);
     }
 
     function loggedin(req, res) {
-        res.json(req.session.currentUser);
+        if (req.session) {
+            return res.json(req.session.currentUser);
+        } else {
+            return res.json(null);
+        }
+
     }
 
     function logout(req, res) {
