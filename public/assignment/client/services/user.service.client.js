@@ -5,10 +5,11 @@
 (function() {
     angular
         .module("FormBuilderApp")
-        .factory("UserService", UserService);
+        .factory("UserService", userService);
 
-    function UserService($rootScope) {
-        var currentUsers=[];
+    function userService($rootScope, $http) {
+
+        /*var currentUsers=[];
         currentUsers = {
             users: [
                 {        "_id":123, "firstName":"Alice",            "lastName":"Wonderland",
@@ -31,36 +32,69 @@
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser
         };
-        return currentUsers;
+        return currentUsers;*/
 
-        function setCurrentUser (user) {
+        var api={
+            createUser: createUser,
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials,
+            findAllUsers: findAllUsers,
+            deleteUserById: deleteUserById,
+            updateUser: updateUser,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
+            login: login,
+            register: register,
+            logout: logout,
+            getProfile: getProfile,
+            setCurrentUser: setCurrentUser
+        };
+        return api;
+
+      /*  function setCurrentUser (user) {
             $rootScope.currentUser = user;
         }
 
         function getCurrentUser () {
             return $rootScope.currentUser;
+        }*/
+
+        function getProfile(){
+            return $http.get("/api/assignment/profile/"+$rootScope.currentUser._id);
+        }
+        function register(user){
+            return $http.post("/api/assignment/register",user);
+        }
+        function logout(){
+            return $http.post("/api/assignment/logout");
+        }
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
         }
 
+        function getCurrentUser() {
+            return $http.get("/api/assignment/loggedin");
+        }
+        function login(credentials) {
+            return $http.post("/api/assignment/login", credentials);
+        }
         function createUser (user, callback) {
-            var user = {
-                _id: (new Date).getTime(), username: user.username, password: user.password
-            };
-            currentUsers.users.push(user);
-            callback=user;
-            return callback;
+        return $http.post("/api/assignment/user",user);
         }
 
         function findUserByUsername (username) {
-            for (var u in currentUsers.users) {
+            /*for (var u in currentUsers.users) {
                 if (currentUsers.users[u].username === username) {
                     return currentUsers.users[u];
                 }
             }
-            return null;
+            return null;*/
+            return $http.get("/api/assignment/"+user);
+
         }
 
         function findUserByCredentials(username, password, callback) {
-            for (var u in currentUsers.users) {
+          /*  for (var u in currentUsers.users) {
               //  console.log(currentUsers.users[u].username);
                 if (currentUsers.users[u].username === username &&
                     currentUsers.users[u].password === password) {
@@ -68,11 +102,13 @@
                     return callback;
                 }
             }
-            return null;
+            return null;*/
+
+            return $http.get("/api/assignment/"+user, user)
         }
 
         function updateUser (userId, user, callback) {
-            for (var u in currentUsers.users) {
+           /* for (var u in currentUsers.users) {
                 if (currentUsers.users[u]._id === userId) {
                     console.log("on the right track");
                     currentUsers.users[u]=user;
@@ -80,24 +116,28 @@
                     return callback;
                 }
             }
-            return null;
+            return null;*/
+
+            return $http.put("/api/assignment/user/"+userId, user);
 
         }
 
         function findAllUsers(callback){
-            callback=currentUsers.users;
-            return callback;
+      /*      callback=currentUsers.users;
+            return callback;*/
+            return $http.get("/api/assignment/user");
 
         }
         function deleteUserById(userId, callback){
-            for (var u in currentUsers.users) {
+            /*for (var u in currentUsers.users) {
                 if (currentUsers.users[u]._id === userId) {
                     currentUsers.users[u].remove();
                     callback=currentUsers.users;
                     return callback;
                 }
             }
-            return null;
+            return null;*/
+            return $http.delete("/api/assignment/user/"+userId);
         }
     }
 })();

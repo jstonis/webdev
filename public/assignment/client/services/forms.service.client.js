@@ -5,11 +5,11 @@
 (function() {
     angular
         .module("FormBuilderApp")
-        .factory("FormService", FormService);
+        .factory("FormService", formService);
 
-    function FormService($rootScope) {
+    function formService($rootScope) {
 
-        var allForms=[];
+      /*  var allForms=[];
         allForms = {
             forms: [
                     {"_id": "000", "title": "Contacts", "userId": 123},
@@ -26,29 +26,39 @@
             getCurrentForm: getCurrentForm,
             getFormByTitle: getFormByTitle
         };
-        return allForms;
+        return allForms;*/
+
+        var api={
+            createFormForUser: createFormForUser,
+            findAllFormsForUser: findAllFormsForUser,
+            deleteFormById: deleteFormById,
+            updateFormById: updateFormById,
+            getFormByTitle: getFormByTitle
+        };
+        return api;
 
 
-        function setCurrentForm (form) {
+        /*function setCurrentForm (form) {
             $rootScope.currentForm = form;
         }
 
         function getCurrentForm () {
             return $rootScope.form;
-        }
+        }*/
 
         function createFormForUser(userId, form, callback){
-            var form = {
-                _id: (new Date).getTime(), userId: userId, title: form.title
-            };
-            allForms.forms.push(form);
-            callback=allForms.forms;
-            return callback;
+            /*var form = {
+             _id: (new Date).getTime(), userId: userId, title: form.title
+             };
+             allForms.forms.push(form);
+             callback=allForms.forms;
+             return callback;*/
+            $http.post("/api/assignment/user/"+userId+"/form", form);
 
         }
 
         function findAllFormsForUser(userId, callback){
-            var formsForUser=[];
+           /* var formsForUser=[];
 
             for (var u in allForms.forms) {
                 if (allForms.forms[u].userId==userId) {
@@ -56,11 +66,12 @@
                 }
             }
             callback=formsForUser;
-            return callback;
+            return callback;*/
+            return $http.get("/api/assignment/user/"+userId+"/form");
         }
 
         function deleteFormById(formId, callback){
-            for (var u in allForms.forms) {
+          /*  for (var u in allForms.forms) {
                 if (allForms.forms[u]._id==formId) {
                     allForms.forms.splice(u,1);
                     callback=allForms.forms;
@@ -68,20 +79,22 @@
                     return callback;
                 }
             }
-            return null;
+            return null;*/
+            $http.delete("/api/assignment/form/"+formId);
         }
         function getFormByTitle(title, callback){
-            for (var u in allForms.forms){
+          /*  for (var u in allForms.forms){
                 if(allForms.forms[u].title=title){
                     callback=allForms.forms[u];
                     return callback;
                 }
             }
-            return null;
+            return null;*/
+
         }
 
         function updateFormById(formId, newForm, callback){
-            console.log("update form: ");
+            /*console.log("update form: ");
             for (var u in allForms.forms) {
                 console.log("going through forms:"+ allForms.forms[u]._id);
                 console.log("selected form id: " + formId);
@@ -92,7 +105,9 @@
                     return callback;
                 }
             }
-            return null;
+            return null;*/
+
+            $http.put("/api/assignment/form/"+formId,newForm);
 
         }
 

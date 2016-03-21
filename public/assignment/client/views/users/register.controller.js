@@ -11,7 +11,7 @@
             $scope.register=register;
 
         function register(user){
-            $scope.message = null;
+           /* $scope.message = null;
             if (user == null) {
                 $scope.message = "Please fill in the required fields";
                 return;
@@ -40,6 +40,8 @@
 
             console.log(UserService.users);
             $location.url("/profile");
+*/
+
 
 
             }

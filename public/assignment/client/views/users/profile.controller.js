@@ -7,18 +7,32 @@
         .controller("ProfileController", ProfileController)
 
 function ProfileController($scope, $location, $rootScope, UserService){
-    $scope.error=null;
+    /*$scope.error=null;
     $scope.message=null;
     $scope.user=UserService.getCurrentUser();
 
 
     if (!$scope.currentUser) {
         $location.url("/home");
-    }
+    }*/
     $scope.update=update;
 
+    var vm=this;
+    function init(){
+        UserService
+            .getProfile()
+            .then(function(response){
+                vm.profile=response.data;
+                console.log(vm.profile);
+            })
+        return init();
+    }
+
+
     function update(user){
-        $scope.error=null;
+
+
+      /*  $scope.error=null;
         $scope.message=null;
 
 
@@ -50,7 +64,9 @@ function ProfileController($scope, $location, $rootScope, UserService){
         }
         else{
             $scope.message="Unable to update the user";
-        }
+        }*/
+
+
     }
 
 }
