@@ -2,7 +2,7 @@
  * Created by Josceyn on 3/18/2016.
  */
 module.exports = function(app, formsModel, userModel) {
-
+console.log("test");
     app.post("/api/assignment/user", createNewUser);
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
