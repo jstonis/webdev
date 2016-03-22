@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Dashboard Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Forms</h1>
             <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="forms.html">Forms</a></li><table class="table table-striped table-bordered">
+                <li role="presentation" class="active"><a href="javascript:;">Forms</a></li>
+                <li role="presentation" ><a href="javascript:;">Fields</a></li>
+
+                <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
 
@@ -44,15 +23,15 @@
 
                     <td>
                         <div class="input-group">
-                            <input type="text" ng-model="newForm.title" class="form-control" placeholder="Name">
+                            <input type="text" ng-model="model.newForm.title" class="form-control" placeholder="Name">
                         </div>
                     </td>
 
                     <td>
                         <div class="input-group">
-                            <button class="glyphicon glyphicon-plus" ng-click="addForm(newForm)" aria-hidden="true"></button>
+                            <button class="glyphicon glyphicon-plus" ng-click="addForm(model.newForm)" aria-hidden="true"></button>
 
-                            <button class="glyphicon glyphicon-ok" ng-click="updateForm(newForm)" aria-hidden="true"></button>
+                            <button class="glyphicon glyphicon-ok" ng-click="updateForm(model.newForm)" aria-hidden="true"></button>
                         </div>
                     </td>
 
@@ -63,9 +42,9 @@
                 </tr>
 
 
-                <tr ng-repeat="form in forms"
-                ng-class="{'success' : $index==selectedFormIndex}">
-                    <td>{{form.title}}</td>
+                <tr ng-repeat="form in model.forms"
+                ng-class="{'success' : $index==model.selectedFormIndex}">
+                    <td><a ng-href={{"#/form/"+form._id+"/fields"}}>{{form.title}}</a></td>
                     <td>
                         <div class="input-group">
                             <button class="glyphicon glyphicon-remove" ng-click="removeForm(form)" aria-hidden="true"></button>
@@ -119,12 +98,3 @@
         </div>
     </div>
 </div>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script>
-</body>
-</html>
-

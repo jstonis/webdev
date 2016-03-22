@@ -1,6 +1,6 @@
+var formModel = require("../models/form.model.js")();
 
 module.exports = function(app) {
-    var fieldsModel = require("./../model/form.model.js")();
 
     app.get("/api/assignment/form/:formId/field", getFieldsOfForm);
     app.get("/api/assignment/form/:formId/field/:fieldId", getFieldById);
@@ -11,9 +11,10 @@ module.exports = function(app) {
 
     function getFieldsOfForm(req, res){
         var formId=req.params.formId;
-        var fields=fieldsModel.getAllFieldsByFormId(formId);
+        var fields=formModel.getAllFieldsByFormId(formId);
         res.json(fields);
     }
+
     function getFieldById(req, res){
         var formId=req.params.formId;
         var fieldId=req.params.fieldId;
@@ -27,18 +28,14 @@ module.exports = function(app) {
     function deleteFieldById(req, res){
         var formId=req.params.formId;
         var fieldId=req.params.fieldId;
-        if(fieldsModel.deleteFieldById(formId,fieldId)){
-            res.send(200);
-            return;;
-        }
-        res.json({message: "Field not found!"});
-
+        var data = formModel.deleteFieldById(formId,fieldId);
+        res.json(data);
     }
     function createNewField(req, res){
         var formId=req.params.formId;
         var field=req.body;
-        fieldsModel.createFieldByFormId(formId, field);
-        res.send(200);
+        var data = formModel.createFieldByFormId(formId, field);
+        res.json(data);
     }
 
     function updateFieldById(req, res){

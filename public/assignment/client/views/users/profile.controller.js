@@ -23,7 +23,6 @@ function ProfileController($scope, $location, $rootScope, UserService){
             .getProfile()
             .then(function(response){
                 $scope.profile=response.data;
-                console.log(vm.profile);
             });
     }
     return init();

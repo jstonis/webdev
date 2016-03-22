@@ -30,15 +30,25 @@
                  })
                  .when("/home", {
                  templateUrl: "views/home/home.view.html",
-                  resolve:{
-                      getLoggedIn: getLoggedIn
-                  }
-
+                    resolve:{
+                        getLoggedIn: getLoggedIn
+                    }
                  })
                  .when("/forms", {
-                 templateUrl: "views/forms/forms.view.html",
-                   controller: "FormController",
-                     controllerAs:"model"
+                    templateUrl: "views/forms/forms.view.html",
+                    controller: "FormController",
+                    controllerAs:"model",
+                    resolve:{
+                        checkLoggedIn: checkLoggedIn
+                    }
+                 })
+                 .when("/form/:formId/fields", {
+                    templateUrl: "views/forms/fields.view.html",
+                    controller: "FieldController",
+                    controllerAs:"model",
+                    resolve:{
+                        checkLoggedIn: checkLoggedIn
+                    }
                  })
                 .otherwise({
                     redirectTo: "/home"

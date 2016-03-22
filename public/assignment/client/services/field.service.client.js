@@ -7,7 +7,7 @@
         .module("FormBuilderApp")
         .factory("FieldService", FieldService);
 
-    function FieldService($rootScope) {
+    function FieldService($rootScope,$http) {
 
         /*  var allForms=[];
          allForms = {
@@ -53,7 +53,7 @@
              allForms.forms.push(form);
              callback=allForms.forms;
              return callback;*/
-            $http.post("/api/assignment/form/"+formId+"/field", field);
+            return $http.post("/api/assignment/form/"+formId+"/field", field);
 
         }
 
@@ -82,6 +82,7 @@
              return null;*/
            $http.get("/api/assignment/form/"+formId+"/field/"+fieldId);
         }
+
         function deleteFieldFromForm(formId, fieldId){
             /*  for (var u in allForms.forms){
              if(allForms.forms[u].title=title){
@@ -90,7 +91,7 @@
              }
              }
              return null;*/
-            $http.delete("/api/assignment/form/"+formId+"/field/"+fieldId);
+            return $http.delete("/api/assignment/form/"+formId+"/field/"+fieldId);
 
         }
 

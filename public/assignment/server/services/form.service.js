@@ -11,8 +11,8 @@ module.exports = function(app, formsModel, userModel) {
 
 
     function getFormsOfUser(req, res){
-        var formId=req.params.formId;
-        var forms=formsModel.findAllFormsForUser(formId);
+        var userId=req.params.userId;
+        var forms=formsModel.findAllFormsForUser(userId);
         res.json(forms);
     }
     function getFormById(req, res){
@@ -25,12 +25,9 @@ module.exports = function(app, formsModel, userModel) {
         res.json({message: "Form not found!"});
     }
     function deleteFormById(req, res){
-        var id=req.params.id;
-        if(formsModel.deleteFormById(id)){
-            res.send(200);
-            return;;
-        }
-        res.json({message: "Form not found!"});
+        var id=req.params.formId;
+        formsModel.deleteFormById(id)
+        res.send(200);
 
     }
     function createNewForm(req, res){
@@ -41,16 +38,10 @@ module.exports = function(app, formsModel, userModel) {
     }
 
     function updateFormById(req, res){
-        var id=req.params.id;
+        var id=req.params.formId;
         var form=req.body;
-        form=formsModel.updateFormById(id,form);
-        if(form){
-            res.json(form);
-            return;
-        }
-        res.json({message:"Form not found!"});
-
-
+        formsModel.updateFormById(id,form);
+        res.send(200);
     }
 
 

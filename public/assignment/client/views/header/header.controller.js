@@ -35,6 +35,7 @@
         }
         function logout(){
             UserService.setCurrentUser(null);
+            UserService.logout();
             $location.url("/home");
         }
 

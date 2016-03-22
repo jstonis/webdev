@@ -14,26 +14,25 @@ module.exports = function() {
 
 
     function createUser (user) {
-        var user = {
-            _id: (new Date).getTime(), username: user.username, password: user.password
+        var userNew = {
+            _id: (new Date).getTime(), 
+            username: user.username,
+            password: user.password,
+            email : user.email
         };
-        mock.push(user);
+        mock.push(userNew);
         //currentUsers.users.push(user);
-        return user;
+        return userNew;
     }
 
     function findUserByUsername (username) {
-      /*  for (var u in currentUsers.users) {
-            if (currentUsers.users[u].username === username) {
-                return currentUsers.users[u];
+        var found ={};
+        mock.forEach(function(user){
+            if (user.username == username){
+                found = user;
             }
-        }*/
-        for (var u in mock) {
-            if (mock[u].username === username) {
-                return mock[u];
-            }
-        }
-        return null;
+        })
+        return found;
     }
 
     function findUserByCredentials(credentials, callback) {
@@ -56,6 +55,8 @@ module.exports = function() {
         }
         return null;
     }
+
+
     function updateUser (userId, user) {
         for (var u in mock) {
             if (mock[u]._id === userId) {

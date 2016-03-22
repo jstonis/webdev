@@ -79,7 +79,8 @@
             return $http.post("/api/assignment/login", credentials);
         }
         function createUser (user, callback) {
-        return $http.post("/api/assignment/user",user);
+
+            return $http.post("/api/assignment/user",user);
         }
 
         function findUserByUsername (username) {
@@ -89,7 +90,11 @@
                 }
             }
             return null;*/
-            return $http.get("/api/assignment/"+user);
+            return $http({
+                url: "/api/assignment/user",
+                method: "GET",
+                params: {username: username}
+            });
 
         }
 

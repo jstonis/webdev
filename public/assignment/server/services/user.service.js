@@ -4,9 +4,8 @@
 module.exports = function(app, formsModel, userModel) {
 
     app.post("/api/assignment/user", createNewUser);
-    app.get("/api/assignment/user", getAllUsers);
+    app.get("/api/assignment/user", getUser);
     app.get("/api/assignment/user/:id", getUserById);
-    app.get("/api/assignment/user?username=username", getUserByUsername);
     app.get("/api/assignment/user?username=alice&password=wonderland", getUserByCredentials);
     app.put("/api/assignment/user/:id", updateUserById);
     app.delete("/api/assignment/user/:id", deleteUserById);
@@ -16,10 +15,28 @@ module.exports = function(app, formsModel, userModel) {
     app.post("/api/assignment/register", register);
     app.get("/api/assignment/profile/:userId", profile);
 
+    function getUser(req,res){
+        var username = req.query.username;
+        var passowrd = req.query.passowrd;
+
+        if(username && passowrd){
+            getUserByCredentials(req,res);
+        }
+
+        else if (username){
+            getUserByUsername(req,res);
+        }
+
+        else{
+            getAllUsers(req,res);
+        }
+
+    }
     function createNewUser(req, res) {
         var user = req.body;
-        userModel.createUser(user);
-        res.send(200);
+        var newUser = userModel.createUser(user);
+        req.session.currentUser = newUser;
+        res.json(newUser);
     }
 
     function getAllUsers(req, res) {
@@ -39,7 +56,8 @@ module.exports = function(app, formsModel, userModel) {
     }
 
     function getUserByUsername(req, res) {
-        var username = req.params.username;
+
+        var username = req.query.username;
         var user = userModel.findUserByUsername(username);
         if (user) {
             res.json(user);
@@ -86,6 +104,7 @@ module.exports = function(app, formsModel, userModel) {
         var credentials = req.body;
 
         var user = userModel.findUserByCredentials(credentials);
+
         req.session.currentUser = user;
         res.json(user);
     }
@@ -109,7 +128,6 @@ module.exports = function(app, formsModel, userModel) {
     function logout(req, res) {
         req.session.destroy();
         res.send(200);
-
     }
 
     function register(req, res) {
