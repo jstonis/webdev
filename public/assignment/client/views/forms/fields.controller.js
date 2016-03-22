@@ -5,8 +5,9 @@
     angular
         .module("FormBuilderApp")
         .controller("FieldController", FieldController)
+        .controller("ModalInstanceCtrl",ModalInstanceCtrl)
 
-    function FieldController($scope, $routeParams, $rootScope, FieldService){
+    function FieldController($scope, $routeParams, $rootScope, FieldService,$uibModal){
     	var self = this;
 
     	var formId = $routeParams.formId;
@@ -81,5 +82,46 @@
     				self.message = "Error adding field"
     			})
     	}
+
+        self.open = function(field){
+        var templateText ='';
+        switch(field.type){
+            case "TEXT":
+            case "TEXTAREA":
+                templateText= 'text.html';
+                break;
+            case "DATE":
+                templateText= 'date.html';
+                break;
+            default:
+                templateText= 'other.html';
+        }
+         var modalInstance = $uibModal.open({
+              templateUrl: templateText,
+              controller: 'ModalInstanceCtrl',
+              size: 'sm',
+              resolve: {
+                field: function () {
+                  return field;
+                }
+              }
+            });
+        }
+    }
+
+    function ModalInstanceCtrl($uibModalInstance,$scope,field){
+        $scope.field = field;
+        if(field.options){
+            $scope.field.display = $scope.field.options.map(function(a){
+                return a.label+':'+a.value;
+            }).join('\n')
+        }
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.selected.item);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
     }
 })();
