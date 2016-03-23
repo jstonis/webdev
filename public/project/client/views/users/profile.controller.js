@@ -15,18 +15,39 @@ function ProfileController($scope, $location, $routeParams, UserService, Product
 
     //console.log($scope.userFollowings);
 
-    $scope.id=$routeParams.id;
-    $scope.user=UserService.findUserById($routeParams.id);
-    var followings=UserService.getFollowersByUserId($scope.user._id);
-    $scope.userFollowings=UserService.getArrayOfUsersByIds(followings);
-    console.log($scope.userFollowings);
-    var userReviews=ProductsService.getReviewsByUser($scope.user);
+    var userId =$routeParams.userId;
 
-    //$scope.userFollowings=getUsersByIds(followers);
-    $scope.follow=follow;
-    var reviewsWithImage=profileViewReviews();
-    $scope.profileViewReviews=profileViewReviews();
-    $scope.userIsCurrentUser=userIsCurrentUser;
+    UserService
+        .findUserById(userId)
+        .then(function(res){
+            $scope.user = res.data
+        },function(err){
+            $scope.err = "err getting profile"
+        });
+
+    ProductsService
+        .getReviewsByUser(userId)
+        .then(function(res){
+            $scope.reviews = res.data
+        },function(err){
+            $scope.err = "err getting reviews"
+        });
+
+    UserService
+        .getFollowersByUserId(userId)
+        .then(function(res){
+            $scope.followers = res.data
+        },function(err){
+            $scope.err = "err getting followers"
+        });
+
+    // var userReviews=ProductsService.getReviewsByUser($scope.user);
+
+    // //$scope.userFollowings=getUsersByIds(followers);
+    // $scope.follow=follow;
+    // var reviewsWithImage=profileViewReviews();
+    // $scope.profileViewReviews=profileViewReviews();
+    // $scope.userIsCurrentUser=userIsCurrentUser;
 
     //var username=$routeParams.username;
     if (!$scope.currentUser) {
@@ -94,6 +115,7 @@ function ProfileController($scope, $location, $routeParams, UserService, Product
         return userReviewsWithImage;
 
     }
+
     function userIsCurrentUser(){
         if($scope.user._id==$rootScope.currentUser._id){
             return true;
