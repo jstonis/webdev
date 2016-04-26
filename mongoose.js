@@ -8,10 +8,10 @@ var path = require('path'),
 
 //db config
 var dbconfig = {
-    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/project',
+    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.OPENSHIFT_MONGODB_DB_HOST+':'+process.env.OPENSHIFT_MONGODB_DB_PORT || 'localhost') + '/webdevspring2016',
     options: {
-      user: '',
-      pass: ''
+      user: 'admin',
+      pass: 'u6h6L8K_tm3H'
     },
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
