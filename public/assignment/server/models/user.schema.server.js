@@ -23,6 +23,9 @@ var UserSchemaAss = new Schema({
     trim: true,
     default: ''
   },
+  salt:{
+    type: String
+  },
   emails: {
     type: [String]
   },
@@ -51,6 +54,7 @@ UserSchemaAss.methods.hashPassword = function (password) {
  * Create instance method for authenticating user
  */
 UserSchemaAss.methods.authenticate = function (password) {
+  console.log(this.hashPassword(password))
   return this.password === this.hashPassword(password);
 };
 
